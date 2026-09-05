@@ -1,0 +1,29 @@
+{
+  "name": "campus-activity-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "vite",
+    "electron:dev": "electron-vite dev",
+    "build": "vite build",
+    "electron:build": "electron-vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lucide/vue": "1.39.0",
+    "vue": "3.5.42",
+    "vue-router": "5.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.8",
+    "electron": "^38.0.0",
+    "electron-vite": "^4.0.1",
+    "vite": "8.2.2"
+  },
+  "allowScripts": {
+    "electron@38.0.0": true,
+    "esbuild@0.25.12": true
+  }
+}
