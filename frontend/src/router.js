@@ -46,6 +46,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
+  // Open the login page first when the desktop app has no active session.
+  if (to.name === 'activities' && !session.user) {
+    return { name: 'login', query: { redirect: to.fullPath } }
+  }
   if (to.meta.role && session.user?.role !== to.meta.role) {
     return { name: 'login', query: { redirect: to.fullPath } }
   }

@@ -1,6 +1,8 @@
 import { computed, reactive } from 'vue'
 
-const saved = JSON.parse(localStorage.getItem('campus-session') || 'null')
+// Keep authentication only for the current Electron/browser session.
+// A fresh desktop launch therefore starts at the login page.
+const saved = JSON.parse(sessionStorage.getItem('campus-session') || 'null')
 
 export const session = reactive({
   token: saved?.token || '',
@@ -19,12 +21,14 @@ export function setSession(auth) {
     displayName: auth.displayName,
     role: auth.role,
   }
-  localStorage.setItem('campus-session', JSON.stringify({ token: session.token, user: session.user }))
+  sessionStorage.setItem('campus-session', JSON.stringify({ token: session.token, user: session.user }))
+  localStorage.removeItem('campus-session')
 }
 
 export function clearSession() {
   session.token = ''
   session.user = null
+  sessionStorage.removeItem('campus-session')
   localStorage.removeItem('campus-session')
 }
 
