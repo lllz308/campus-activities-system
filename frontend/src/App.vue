@@ -1,15 +1,14 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { CalendarDays, ClipboardList, LogIn, LogOut, Menu, School, Settings2, X } from '@lucide/vue'
+import { CalendarDays, ClipboardList, LogIn, Menu, School, Settings2, X } from '@lucide/vue'
 import { api } from './api'
 import { clearSession, isStudent, isTeacher, session } from './session'
+import ProfilePopover from './components/ProfilePopover.vue'
 
 const router = useRouter()
 const menuOpen = ref(false)
 const toast = ref('')
-
-const initials = computed(() => session.user?.displayName?.slice(0, 1) || '')
 
 async function logout() {
   try {
@@ -50,16 +49,7 @@ async function logout() {
       </nav>
 
       <div class="account-actions">
-        <template v-if="session.user">
-          <span class="avatar" :title="session.user.displayName">{{ initials }}</span>
-          <div class="account-copy">
-            <strong>{{ session.user.displayName }}</strong>
-            <span>{{ session.user.role === 'TEACHER' ? '活动组织教师' : '学生' }}</span>
-          </div>
-          <button class="icon-button" type="button" title="退出登录" aria-label="退出登录" @click="logout">
-            <LogOut :size="19" />
-          </button>
-        </template>
+        <ProfilePopover v-if="session.user" @logout="logout" />
         <RouterLink v-else class="button button-secondary button-small" to="/login">
           <LogIn :size="17" />登录
         </RouterLink>

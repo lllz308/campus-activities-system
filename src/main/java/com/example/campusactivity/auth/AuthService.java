@@ -37,7 +37,7 @@ public class AuthService {
             throw new BusinessException(HttpStatus.CONFLICT, "用户名已存在");
         }
         User user = userRepository.save(new User(request.username(), passwordEncoder.encode(request.password()),
-                request.displayName(), request.role()));
+                request.displayName(), request.role(), request.studentNo(), request.major(), request.email()));
         return issueToken(user);
     }
 

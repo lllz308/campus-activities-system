@@ -32,3 +32,11 @@ export function clearSession() {
   localStorage.removeItem('campus-session')
 }
 
+export function updateSessionUser(patch) {
+  if (!session.user) {
+    return
+  }
+  session.user = { ...session.user, ...patch }
+  sessionStorage.setItem('campus-session', JSON.stringify({ token: session.token, user: session.user }))
+}
+

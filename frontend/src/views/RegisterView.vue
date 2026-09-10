@@ -6,7 +6,7 @@ import { api } from '../api'
 import { setSession } from '../session'
 
 const router = useRouter()
-const form = ref({ username: '', displayName: '', password: '', role: 'STUDENT' })
+const form = ref({ username: '', displayName: '', password: '', role: 'STUDENT', studentNo: '', major: '', email: '' })
 const error = ref('')
 const submitting = ref(false)
 
@@ -41,6 +41,11 @@ async function submit() {
         <label><span>用户名</span><div class="input-with-icon"><UserRound :size="18" /><input v-model="form.username" pattern="[A-Za-z0-9_]{4,20}" autocomplete="username" placeholder="4-20 位字母、数字或下划线" required /></div></label>
         <label><span>显示名称</span><input v-model="form.displayName" maxlength="40" placeholder="如：王同学" required /></label>
         <label><span>密码</span><div class="input-with-icon"><LockKeyhole :size="18" /><input v-model="form.password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="至少 8 位" required /></div></label>
+        <template v-if="form.role === 'STUDENT'">
+          <label><span>学号</span><input v-model="form.studentNo" maxlength="32" placeholder="如：20230001（选填）" /></label>
+          <label><span>专业</span><input v-model="form.major" maxlength="64" placeholder="如：计算机科学与技术（选填）" /></label>
+          <label><span>邮箱</span><input v-model="form.email" type="email" maxlength="128" placeholder="如：name@campus.edu.cn（选填）" /></label>
+        </template>
         <div v-if="error" class="inline-error">{{ error }}</div>
         <button class="button button-primary button-block" type="submit" :disabled="submitting">{{ submitting ? '创建中...' : '创建账号' }}<ArrowRight :size="17" /></button>
         <p class="auth-switch">已有账号？<RouterLink to="/login">返回登录</RouterLink></p>

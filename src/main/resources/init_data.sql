@@ -16,6 +16,24 @@ SELECT TIMESTAMP '2026-09-06 15:06:39.344923', U&'\90d1',
        '$2a$10$s5KEONovd2FnLZD4x76pTeNmvbdRkNYyhHgLgN0ooY6twcsj6ggAq', 'TEACHER', 'zzzz'
 WHERE NOT EXISTS (SELECT 1 FROM app_user WHERE username = 'zzzz');
 
+-- Backfill profile fields for demo users (idempotent: only fills rows still missing an email).
+UPDATE app_user
+SET student_no = '20230001',
+    major = U&'\8ba1\7b97\673a\79d1\5b66\4e0e\6280\672f',
+    email = 'student01@campus.edu.cn'
+WHERE username = 'student01' AND email IS NULL;
+
+UPDATE app_user
+SET student_no = 'T0001',
+    major = U&'\8ba1\7b97\673a\5b66\9662',
+    email = 'teacher01@campus.edu.cn'
+WHERE username = 'teacher01' AND email IS NULL;
+
+UPDATE app_user
+SET student_no = 'T0002',
+    email = 'zzzz@campus.edu.cn'
+WHERE username = 'zzzz' AND email IS NULL;
+
 INSERT INTO activity
     (capacity, created_at, description, end_time, location, registration_deadline,
      start_time, status, title, updated_at, version, organizer_id)
