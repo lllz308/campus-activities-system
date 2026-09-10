@@ -18,7 +18,7 @@ async function logout() {
     clearSession()
     menuOpen.value = false
     toast.value = '已安全退出'
-    router.push({ name: 'activities' })
+    await router.replace({ name: 'login' })
     window.setTimeout(() => (toast.value = ''), 2200)
   }
 }

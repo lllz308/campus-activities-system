@@ -10,11 +10,17 @@ spring:
 
   jpa:
     open-in-view: false
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:init_data.sql
 
   h2:
     console:

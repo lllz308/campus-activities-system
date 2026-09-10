@@ -17,7 +17,7 @@
 - Spring Boot 3.5.7
 - Spring Web / Validation / Security
 - Spring Data JPA
-- H2 内存数据库
+- H2 文件数据库
 - Maven
 
 ## 快速开始
@@ -42,9 +42,13 @@ pnpm dev
 
 H2 控制台：`http://localhost:8080/h2-console`
 
-- JDBC URL：`jdbc:h2:mem:campus`
+- JDBC URL：`jdbc:h2:file:./data/campus`
 - 用户名：`sa`
 - 密码：留空
+
+首次启动时，Hibernate 会创建本地数据库结构，随后执行
+`src/main/resources/init_data.sql` 导入仓库内的初始业务数据。运行时生成的
+`data/` 目录只属于当前电脑，不提交到 Git。
 
 演示账号：
 
