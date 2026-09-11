@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { CalendarDays, ClipboardList, LogIn, Menu, School, Settings2, X } from '@lucide/vue'
+import { CalendarDays, ClipboardList, History, LogIn, Menu, School, Settings2, X } from '@lucide/vue'
 import { api } from './api'
 import { clearSession, isStudent, isTeacher, session } from './session'
 import ProfilePopover from './components/ProfilePopover.vue'
@@ -42,6 +42,9 @@ async function logout() {
         </RouterLink>
         <RouterLink v-if="isStudent" to="/my-registrations" @click="menuOpen = false">
           <ClipboardList :size="17" />我的报名
+        </RouterLink>
+        <RouterLink v-if="isStudent" to="/my-history" @click="menuOpen = false">
+          <History :size="17" />历史记录
         </RouterLink>
         <RouterLink v-if="isTeacher" to="/teacher/activities" @click="menuOpen = false">
           <Settings2 :size="17" />活动管理

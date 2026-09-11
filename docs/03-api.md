@@ -58,4 +58,5 @@
 | POST | `/api/student/activities/{id}/registrations` | 报名活动 |
 | DELETE | `/api/student/activities/{id}/registrations` | 取消报名 |
 | GET | `/api/student/registrations` | 查询自己的报名记录 |
+| GET | `/api/student/registrations/history` | 查询自己的历史参加记录（已结束的活动） |
 

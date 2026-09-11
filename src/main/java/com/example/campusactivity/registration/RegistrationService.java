@@ -7,6 +7,7 @@ import com.example.campusactivity.activity.Activity;
 import com.example.campusactivity.activity.ActivityRepository;
 import com.example.campusactivity.activity.ActivityStatus;
 import com.example.campusactivity.common.BusinessException;
+import com.example.campusactivity.registration.dto.HistoryRecordResponse;
 import com.example.campusactivity.registration.dto.RegistrationResponse;
 import com.example.campusactivity.security.AppPrincipal;
 import com.example.campusactivity.user.User;
@@ -65,10 +66,23 @@ public class RegistrationService {
                 .stream().map(this::toResponse).toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<HistoryRecordResponse> listHistory(AppPrincipal principal) {
+        return registrationRepository.findHistoryByStudentId(principal.id(), LocalDateTime.now())
+                .stream().map(this::toHistoryResponse).toList();
+    }
+
     private RegistrationResponse toResponse(Registration registration) {
         Activity activity = registration.getActivity();
         return new RegistrationResponse(registration.getId(), activity.getId(), activity.getTitle(),
                 activity.getStartTime(), registration.getRegisteredAt());
+    }
+
+    private HistoryRecordResponse toHistoryResponse(Registration registration) {
+        Activity activity = registration.getActivity();
+        return new HistoryRecordResponse(registration.getId(), activity.getId(), activity.getTitle(),
+                activity.getLocation(), activity.getStartTime(), activity.getEndTime(),
+                registration.getRegisteredAt());
     }
 }
 

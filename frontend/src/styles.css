@@ -165,6 +165,7 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .registration-copy strong { font-size: 16px; }
 .registration-copy span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
 .registration-time { color: var(--muted); font-size: 12px; }
+.history-row { grid-template-columns: 50px minmax(220px,1fr) auto auto; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); background: white; }
 .data-table { width: 100%; border-collapse: collapse; min-width: 760px; }
 .data-table th { padding: 13px 16px; background: #eef2f0; color: #61706b; text-align: left; font-size: 12px; }

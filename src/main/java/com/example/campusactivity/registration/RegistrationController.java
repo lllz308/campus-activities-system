@@ -3,6 +3,7 @@ package com.example.campusactivity.registration;
 import java.util.List;
 
 import com.example.campusactivity.common.ApiResponse;
+import com.example.campusactivity.registration.dto.HistoryRecordResponse;
 import com.example.campusactivity.registration.dto.RegistrationResponse;
 import com.example.campusactivity.security.AppPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,6 +40,11 @@ public class RegistrationController {
     @GetMapping("/registrations")
     public ApiResponse<List<RegistrationResponse>> listMine(@AuthenticationPrincipal AppPrincipal principal) {
         return ApiResponse.success(registrationService.listMine(principal));
+    }
+
+    @GetMapping("/registrations/history")
+    public ApiResponse<List<HistoryRecordResponse>> listHistory(@AuthenticationPrincipal AppPrincipal principal) {
+        return ApiResponse.success(registrationService.listHistory(principal));
     }
 }
 

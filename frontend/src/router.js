@@ -5,6 +5,7 @@ import ActivityDetailView from './views/ActivityDetailView.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import StudentRegistrationsView from './views/StudentRegistrationsView.vue'
+import StudentHistoryView from './views/StudentHistoryView.vue'
 import TeacherActivitiesView from './views/TeacherActivitiesView.vue'
 import ActivityEditorView from './views/ActivityEditorView.vue'
 import NotFoundView from './views/NotFoundView.vue'
@@ -21,6 +22,12 @@ const router = createRouter({
       path: '/my-registrations',
       name: 'student-registrations',
       component: StudentRegistrationsView,
+      meta: { role: 'STUDENT' },
+    },
+    {
+      path: '/my-history',
+      name: 'student-history',
+      component: StudentHistoryView,
       meta: { role: 'STUDENT' },
     },
     {
